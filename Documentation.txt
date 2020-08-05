@@ -1,3 +1,70 @@
 Documentation
 
-added 10:00pm
+https://jun711.github.io/aws/how-to-pause-or-stop-elastic-beanstalk-environment-from-running/
+
+Pasuing and resuming EB
+
+pause
+-----
+
+How to pause or stop AWS Elastic Beanstalk environment from running? March 09, 2019   3 minute read  
+ Menu
+AWS Elastic Beanstalk
+Issue
+Solutions
+Use Time-based Scaling
+Steps to pause an EB environment
+Steps to resume an EB environment
+Using Elastic Beanstalk CLI
+Summary
+Support Jun
+There is no straightforward way to pause an Elastic Beanstalk(EB) environment on AWS console. You can’t terminate it as it will be deleted.
+Fret not, you can stop your Elastic Beanstalk environment from running when it is not needed so that you only pay when you use it.
+
+AWS Elastic BeanstalkPermalink
+In case you aren’t familiar with AWS Elastic Beanstalk. On AWS Elastic Beanstalk doc, it says that
+
+With Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without having to learn about the infrastructure that runs those applications. Elastic Beanstalk reduces management complexity without restricting choice or control. You simply upload your application, and Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.
+
+
+ 
+For an example use case, you can host your Angular, React or Vue app or your website and manage your hosting via AWS Elastic Beanstalk.
+
+IssuePermalink
+There is no pause action on AWS Elastic Beanstalk console menu:
+
+AWS Elastic Beanstalk Console Action Menu
+
+SolutionsPermalink
+Use Time-based ScalingPermalink
+You can modify your EB environment capacity on AWS console. Using time-based scaling, you can schedule a task to turn your EB environment to have 0 instances running and thus pausing your environment.
+
+Steps to pause an EB environmentPermalink
+On AWS Elastic Beanstalk console, select the environment you want to pause.
+On left panel, select Configuration.
+On Configuration Overview menu, modify Capacity (first row, third from right).
+On Modify Capacity menu, scroll down to Time-based scaling. AWS Elastic Beanstalk Time-based Scaling
+
+Select Add scheduled action and you will see a menu like this:
+AWS Elastic Beanstalk Scheduled Action
+
+Set the Min and Max of instances and Desired capacity to 0.
+Set the start time about 5 minutes from your current UTC time so that the pause action has enough time to execute.
+Note that it is in UTC(Coordinated Universal Time).
+Click Add to close the action menu.
+Choose Local for time zone and check if scaling is scheduled at the right time.
+Click Apply so that this added scheduled action will take effect.
+Your environment will be updated and will be set to 0 instance.
+Environment Overview page will look like this: AWS Elastic Beanstalk Environment Paused State
+
+resume
+------
+
+Now that you have your EB environment paused, when you want your EB instance to resume running, you can repeat the steps above but this time, you should set min, max of instances and desired capacity to the number that you would like it to be.
+
+Your scheduled actions are saved in time-based scaling action list. Thus, subsequently, you just need to reschedule the needed action.
+AWS Elastic Beanstalk Scaling Scheduled Actions
+
+
+
+
