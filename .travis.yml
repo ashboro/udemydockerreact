@@ -3,7 +3,8 @@ sudo: required
 
 services:
   - docker
-
+  
+# to live dockerfile
 before_install:
   - docker build -t ashboro/udemydockerreact  -f Dockerfile .
 
