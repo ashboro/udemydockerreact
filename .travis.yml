@@ -3,10 +3,8 @@ sudo: required
 
 services:
   - docker
-  
-# to live dockerfile
 before_install:
-  - docker build -t ashboro/udemydockerreact  -f Dockerfile .
+  - docker build -t ashboro/udemydockerreact -f Dockerfile.dev .
 
 script:
   - docker run -e CI=true ashboro/udemydockerreact  npm run test
@@ -19,11 +17,7 @@ deploy:
     bucket_name: "elasticbeanstalk-us-east-2-668379478615"
     bucket_path: "docker-react"
     on:
-        - brAnch: master
-        access_key_id: $AWS_ACCESS_KEY
-        secret_access_key: 
-            secure: "$AWS_SECRET_KEY"
-
-            #end script
-
+    - branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
      
